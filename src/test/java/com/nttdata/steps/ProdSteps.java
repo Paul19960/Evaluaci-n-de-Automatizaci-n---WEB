@@ -51,19 +51,8 @@ public class ProdSteps {
      * Hacer click en el botón login
      */
     public void login(){
-        this.driver.findElement(MyStorePage.loginButton).click();
+        this.driver.findElement(ProdPage.loginButton).click();
     }
 
-    public void validarItems(InventorySteps inventorySteps) {
-        int itemsListSize = inventorySteps.getItemSize();
-        //prueba: validar que al menos exista un item
-        screenShot();
-        Assertions.assertTrue(itemsListSize > 0, "El tamaño de la lista es: " + itemsListSize);
 
-        /*try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }*/
-    }
 }
