@@ -74,17 +74,15 @@ public class ProdStepsDef {
 
     @And("me logueo con mi usuario {string} y clave {string}")
     public void meLogueoConMiUsuarioYClave(String user, String password) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         prodSteps  = new ProdSteps(driver);
         prodSteps.typeUser(user);
         prodSteps.typePassword(password);
         prodSteps.login();
         screenShot();
 
-        try{
-            Thread.sleep(1000);
-        }catch (Exception e){
-
-        }
     }
 
     @When("navego a la categoria {string} y subcategoria {string}")
@@ -113,17 +111,46 @@ public class ProdStepsDef {
         }
     }
 
-
-    /*@Then("valido en el popup la confirmación del producto agregado {string}")
-    public void validoEnElPopupLaConfirmacionDelProductoAgregado(String title) {
-        //prueba: validamos el título del producto
-        Assertions.assertEquals("Producto añadido correctamente a su carrito de compra", title);
-    }*/
-
     @Then("valido en el popup la confirmación del producto agregado")
     public void validoEnElPopupLaConfirmacionDelProductoAgregado() {
         driver = getDriver();
-        String cartCount = driver.findElement(By.xpath("//div[@class=\"col-md-7\"]/div/p[@class=\"cart-products-count\"]")).getText();
+        String cartCount = driver.findElement(ProdPage.ConfirmaProd).getText();
         Assert.assertEquals("Hay 2 artículos en su carrito.", cartCount);
+    }
+
+    @And("valido en el popup que el monto total sea calculado correctamente")
+    public void validoEnElPopupQueElMontoTotalSeaCalculadoCorrectamente() {
+
+        driver = getDriver();
+        String MontoTotalObt = driver.findElement(ProdPage.Total1).getText();
+        String MontoTotalEsp = driver.findElement(ProdPage.ExpectedTotal1).getText();
+        Assert.assertEquals(MontoTotalEsp, MontoTotalObt);
+    }
+
+    @When("finalizo la compra")
+    public void finalizoLaCompra() {
+        driver.findElement(ProdPage.botonFinaliza).click();
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){
+        }
+    }
+
+    @Then("valido el titulo de la pagina del carrito")
+    public void validoElTituloDeLaPaginaDelCarrito() {
+
+        String title =  carroSteps(driver).getTitle();
+        String expectedTitle =  carroSteps(driver).getTitle();
+
+        Assertions.assertEquals(expectedTitle, title);
+
+    }
+
+    @And("vuelvo a validar el calculo de precios en el carrito")
+    public void vuelvoAValidarElCalculoDePreciosEnElCarrito() {
+        driver = getDriver();
+        String MontoTotalObt = driver.findElement(ProdPage.Total).getText();
+        String MontoTotalEsp = driver.findElement(ProdPage.ExpectedTotal).getText();
+        Assert.assertEquals(MontoTotalEsp, MontoTotalObt);
     }
 }

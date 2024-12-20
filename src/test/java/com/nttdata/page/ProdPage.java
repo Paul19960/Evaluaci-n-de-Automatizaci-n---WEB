@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 public class ProdPage {
 
-    //Localizadores de elementos
+    //Localizadores para realizar las pruebas funcionales
     public static By userInput = By.id("field-email");
     public static By passInput = By.id("field-password");
     public static By loginButton = By.id("submit-login");
@@ -16,4 +16,11 @@ public class ProdPage {
     public static By SumCantidad = By.xpath("//div[@class=\"qty\"]/div/span/button[@class=\"btn btn-touchspin js-touchspin bootstrap-touchspin-up\"]");
     public static By AddCart = By.xpath("//div[@class=\"add\"]/button[@class=\"btn btn-primary add-to-cart\"]");
     public static By ValProdCart = By.xpath("//*[@id=\"myModalLabel\"]");
+    public static By ConfirmaProd = By.xpath("//div[@class=\"col-md-7\"]/div/p[@class=\"cart-products-count\"]");
+    public static By botonFinaliza = By.xpath("//div[@class=\"cart-content-btn\"]/a[@class=\"btn btn-primary\"]");
+    public static By Total1 = By.xpath("//p[@class=\"product-total\"]/span[@class=\"value\"]");
+    public static By ExpectedTotal1 = By.xpath("//p[@class=\"product-total\"]/span[@class=\"value\"]");
+    public static By Total = By.xpath("//div[@class=\"cart-summary-line cart-total\"]/span[@class=\"value\"]");
+    public static By ExpectedTotal = By.xpath("//div[@class=\"cart-summary-line cart-total\"]/span[@class=\"value\"]");
+
 }
